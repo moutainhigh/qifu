@@ -137,7 +137,7 @@ CREATE TABLE `tb_sys` (
 
 LOCK TABLES `tb_sys` WRITE;
 /*!40000 ALTER TABLE `tb_sys` DISABLE KEYS */;
-INSERT INTO `tb_sys` VALUES ('c6643182-85a5-4f91-9e73-10567ebd0dd5','CORE','Z. Core','127.0.0.1:8080','core-web','Y','SYSTEM','admin','2017-04-10 20:42:00','admin','2017-04-10 20:42:00');
+INSERT INTO `tb_sys` VALUES ('c6643182-85a5-4f91-9e73-10567ebd0dd5','CORE','Core-system','127.0.0.1:8080','core-web','Y','SYSTEM','admin','2017-04-10 20:42:00','admin','2017-04-10 20:42:00');
 /*!40000 ALTER TABLE `tb_sys` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,6 +267,104 @@ LOCK TABLES `tb_sys_login_log` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_menu`
+--
+
+DROP TABLE IF EXISTS `tb_sys_menu`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_menu` (
+  `OID` char(36) NOT NULL,
+  `PROG_ID` varchar(50) NOT NULL,
+  `PARENT_OID` char(36) NOT NULL,
+  `ENABLE_FLAG` varchar(1) NOT NULL DEFAULT 'Y',
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`PROG_ID`,`PARENT_OID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_menu`
+--
+
+LOCK TABLES `tb_sys_menu` WRITE;
+/*!40000 ALTER TABLE `tb_sys_menu` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_menu_role`
+--
+
+DROP TABLE IF EXISTS `tb_sys_menu_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_menu_role` (
+  `OID` char(36) NOT NULL,
+  `PROG_ID` varchar(50) NOT NULL,
+  `ROLE` varchar(50) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`PROG_ID`,`ROLE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_menu_role`
+--
+
+LOCK TABLES `tb_sys_menu_role` WRITE;
+/*!40000 ALTER TABLE `tb_sys_menu_role` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_menu_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_prog`
+--
+
+DROP TABLE IF EXISTS `tb_sys_prog`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_prog` (
+  `OID` char(36) NOT NULL,
+  `PROG_ID` varchar(50) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `URL` varchar(255) NOT NULL,
+  `EDIT_MODE` varchar(1) NOT NULL DEFAULT 'N',
+  `IS_DIALOG` varchar(1) NOT NULL DEFAULT 'N',
+  `DIALOG_W` int(4) NOT NULL DEFAULT '0',
+  `DIALOG_H` int(4) NOT NULL DEFAULT '0',
+  `PROG_SYSTEM` varchar(10) NOT NULL,
+  `ITEM_TYPE` varchar(10) NOT NULL,
+  `ICON` varchar(20) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`PROG_ID`),
+  KEY `IDX_1` (`PROG_SYSTEM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_prog`
+--
+
+LOCK TABLES `tb_sys_prog` WRITE;
+/*!40000 ALTER TABLE `tb_sys_prog` DISABLE KEYS */;
+INSERT INTO `tb_sys_prog` VALUES ('1b11c7eb-6133-48fb-87f0-dfbd098ce914','CORE_PROG001D0001E','01 - System site (Edit)','core.sysSiteEdit.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('3630ee1b-6169-452f-821f-5c015dfb84d5','CORE_PROG001D','Z. Config','','N','N',0,0,'CORE','FOLDER','PROPERTIES','admin','2014-10-02 00:00:00',NULL,NULL),('ac5bcfd0-4abd-11e4-916c-0800200c9a66','CORE_PROG001D0001A','01 - System site (Create)','core.sysSiteCreate.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('b6b89559-6864-46ab-9ca9-0992dcf238f1','CORE_PROG001D0001Q','01 - System site','core.sysSiteManagement.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL);
+/*!40000 ALTER TABLE `tb_sys_prog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_sys_usess`
 --
 
@@ -337,4 +435,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-10 20:45:19
+-- Dump completed on 2017-04-18 20:36:28
