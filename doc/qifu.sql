@@ -293,7 +293,7 @@ CREATE TABLE `tb_sys_menu` (
 
 LOCK TABLES `tb_sys_menu` WRITE;
 /*!40000 ALTER TABLE `tb_sys_menu` DISABLE KEYS */;
-INSERT INTO `tb_sys_menu` VALUES ('47d235c2-3bc4-446f-9790-68c9500801c9','CORE_PROG001D0001Q','7ea68636-c93a-4669-ac42-dafc3770d20d','Y','admin','2017-04-20 11:25:55',NULL,NULL),('7ea68636-c93a-4669-ac42-dafc3770d20d','CORE_PROG001D','00000000-0000-0000-0000-000000000000','Y','admin','2017-04-20 11:24:53',NULL,NULL);
+INSERT INTO `tb_sys_menu` VALUES ('47d235c2-3bc4-446f-9790-68c9500801c9','CORE_PROG001D0001Q','7ea68636-c93a-4669-ac42-dafc3770d20d','Y','admin','2017-04-20 11:25:55',NULL,NULL),('7ea68636-c93a-4669-ac42-dafc3770d20d','CORE_PROG001D','00000000-0000-0000-0000-000000000000','Y','admin','2017-04-20 11:24:53',NULL,NULL),('cdb9c6d6-b893-4f26-c202-53766542d4f6','CORE_PROG001D0002Q','7ea68636-c93a-4669-ac42-dafc3770d20d','Y','admin','2017-05-02 19:51:00',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_menu` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,7 +361,7 @@ CREATE TABLE `tb_sys_prog` (
 
 LOCK TABLES `tb_sys_prog` WRITE;
 /*!40000 ALTER TABLE `tb_sys_prog` DISABLE KEYS */;
-INSERT INTO `tb_sys_prog` VALUES ('1b11c7eb-6133-48fb-87f0-dfbd098ce914','CORE_PROG001D0001E','01 - System site (Edit)','core.sysSiteEdit.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('3630ee1b-6169-452f-821f-5c015dfb84d5','CORE_PROG001D','Z. Config','','N','N',0,0,'CORE','FOLDER','PROPERTIES','admin','2014-10-02 00:00:00',NULL,NULL),('ac5bcfd0-4abd-11e4-916c-0800200c9a66','CORE_PROG001D0001A','01 - System site (Create)','core.sysSiteCreate.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('b6b89559-6864-46ab-9ca9-0992dcf238f1','CORE_PROG001D0001Q','01 - System site','core.sysSiteManagement.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL);
+INSERT INTO `tb_sys_prog` VALUES ('1b11c7eb-6133-48fb-87f0-dfbd098ce914','CORE_PROG001D0001E','01 - System site (Edit)','core.sysSiteEdit.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('3630ee1b-6169-452f-821f-5c015dfb84d5','CORE_PROG001D','Z. Config','','N','N',0,0,'CORE','FOLDER','PROPERTIES','admin','2014-10-02 00:00:00',NULL,NULL),('8499957e-6da9-4160-c2ec-dfb7dbc202fe','CORE_PROG001D0002E','02 - Program (Edit)','core.sysProgramEdit.do','N','N',0,0,'CORE','ITEM','G_APP_INSTALL','admin','2014-10-02 00:00:00',NULL,NULL),('ac5bcfd0-4abd-11e4-916c-0800200c9a66','CORE_PROG001D0001A','01 - System site (Create)','core.sysSiteCreate.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('b6b89559-6864-46ab-9ca9-0992dcf238f1','CORE_PROG001D0001Q','01 - System site','core.sysSiteManagement.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('e32b9329-bb38-46d7-8552-2307bac77724','CORE_PROG001D0002A','02 - Program (Create)','core.sysProgramCreate.do','N','N',0,0,'CORE','ITEM','G_APP_INSTALL','admin','2014-10-02 00:00:00',NULL,NULL),('eb6e199f-c853-4fbf-acf3-0c9c77ba9953','CORE_PROG001D0002Q','02 - Program','core.sysProgramManagement.do','N','N',0,0,'CORE','ITEM','G_APP_INSTALL','admin','2014-10-02 00:00:00',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_prog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -436,4 +436,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-20 11:28:11
+-- Dump completed on 2017-05-02 19:52:16
