@@ -366,6 +366,169 @@ INSERT INTO `tb_sys_prog` VALUES ('1b11c7eb-6133-48fb-87f0-dfbd098ce914','CORE_P
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_template`
+--
+
+DROP TABLE IF EXISTS `tb_sys_template`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_template` (
+  `OID` char(36) NOT NULL,
+  `TEMPLATE_ID` varchar(10) NOT NULL,
+  `TITLE` varchar(200) NOT NULL,
+  `MESSAGE` varchar(4000) NOT NULL,
+  `DESCRIPTION` varchar(200) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TEMPLATE_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_template`
+--
+
+LOCK TABLES `tb_sys_template` WRITE;
+/*!40000 ALTER TABLE `tb_sys_template` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_template` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_template_param`
+--
+
+DROP TABLE IF EXISTS `tb_sys_template_param`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_template_param` (
+  `OID` char(36) NOT NULL,
+  `TEMPLATE_ID` varchar(10) NOT NULL,
+  `IS_TITLE` varchar(1) NOT NULL DEFAULT 'N',
+  `TEMPLATE_VAR` varchar(100) NOT NULL,
+  `OBJECT_VAR` varchar(100) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TEMPLATE_ID`,`TEMPLATE_VAR`,`IS_TITLE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_template_param`
+--
+
+LOCK TABLES `tb_sys_template_param` WRITE;
+/*!40000 ALTER TABLE `tb_sys_template_param` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_template_param` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_upload`
+--
+
+DROP TABLE IF EXISTS `tb_sys_upload`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_upload` (
+  `OID` char(36) NOT NULL,
+  `SYSTEM` varchar(10) NOT NULL,
+  `SUB_DIR` varchar(4) NOT NULL,
+  `TYPE` varchar(10) NOT NULL,
+  `FILE_NAME` varchar(50) NOT NULL,
+  `SHOW_NAME` varchar(255) NOT NULL,
+  `IS_FILE` varchar(1) NOT NULL DEFAULT 'Y',
+  `CONTENT` mediumblob,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  KEY `IDX_1` (`SYSTEM`,`TYPE`,`SUB_DIR`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_upload`
+--
+
+LOCK TABLES `tb_sys_upload` WRITE;
+/*!40000 ALTER TABLE `tb_sys_upload` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_upload` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_upload_tran`
+--
+
+DROP TABLE IF EXISTS `tb_sys_upload_tran`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_upload_tran` (
+  `OID` char(36) NOT NULL,
+  `TRAN_ID` varchar(10) NOT NULL,
+  `SEGM_MODE` varchar(10) NOT NULL DEFAULT 'BYTE',
+  `SEGM_SYMBOL` varchar(1) NOT NULL DEFAULT ',',
+  `ENCODING` varchar(10) NOT NULL,
+  `EXPR_TYPE` varchar(10) NOT NULL,
+  `HELP_EXPRESSION` varchar(8000) NOT NULL,
+  `BEGIN_LEN` int(1) NOT NULL DEFAULT '0',
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TRAN_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_upload_tran`
+--
+
+LOCK TABLES `tb_sys_upload_tran` WRITE;
+/*!40000 ALTER TABLE `tb_sys_upload_tran` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_upload_tran` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_upload_tran_segm`
+--
+
+DROP TABLE IF EXISTS `tb_sys_upload_tran_segm`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_upload_tran_segm` (
+  `OID` char(36) NOT NULL,
+  `TRAN_ID` varchar(10) NOT NULL,
+  `NAME` varchar(50) NOT NULL,
+  `BEGIN` int(4) NOT NULL,
+  `END` int(4) NOT NULL,
+  `CUSERID` varchar(50) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`TRAN_ID`,`NAME`),
+  KEY `IDX_1` (`TRAN_ID`,`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_upload_tran_segm`
+--
+
+LOCK TABLES `tb_sys_upload_tran_segm` WRITE;
+/*!40000 ALTER TABLE `tb_sys_upload_tran_segm` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_upload_tran_segm` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_sys_usess`
 --
 
@@ -436,4 +599,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-10 18:52:52
+-- Dump completed on 2017-05-11 19:11:16
