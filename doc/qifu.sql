@@ -239,6 +239,68 @@ INSERT INTO `tb_sys_icon` VALUES ('00a11813-0fbd-481f-bab8-11bdf0df1a7e','HELP_A
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_jreport`
+--
+
+DROP TABLE IF EXISTS `tb_sys_jreport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_jreport` (
+  `OID` char(36) NOT NULL,
+  `REPORT_ID` varchar(50) NOT NULL,
+  `FILE` varchar(100) NOT NULL,
+  `IS_COMPILE` varchar(50) NOT NULL DEFAULT 'N',
+  `CONTENT` mediumblob NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`REPORT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_jreport`
+--
+
+LOCK TABLES `tb_sys_jreport` WRITE;
+/*!40000 ALTER TABLE `tb_sys_jreport` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_jreport` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_jreport_param`
+--
+
+DROP TABLE IF EXISTS `tb_sys_jreport_param`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_jreport_param` (
+  `OID` char(36) NOT NULL,
+  `REPORT_ID` varchar(50) NOT NULL,
+  `URL_PARAM` varchar(100) NOT NULL,
+  `RPT_PARAM` varchar(100) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`REPORT_ID`,`RPT_PARAM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_jreport_param`
+--
+
+LOCK TABLES `tb_sys_jreport_param` WRITE;
+/*!40000 ALTER TABLE `tb_sys_jreport_param` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_jreport_param` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_sys_login_log`
 --
 
@@ -599,4 +661,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-12 18:46:22
+-- Dump completed on 2017-05-16 19:12:22
