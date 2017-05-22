@@ -205,6 +205,7 @@ CREATE TABLE `tb_sys_ctx_bean` (
 
 LOCK TABLES `tb_sys_ctx_bean` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ctx_bean` DISABLE KEYS */;
+INSERT INTO `tb_sys_ctx_bean` VALUES ('19e69795-46f9-4fb4-8410-b4139239d7a6','CORE','org.qifu.support.ConfigureAppSiteHostForContextInitialized','INITIALIZE','Config modules host.','admin','2017-05-22 19:34:50',NULL,NULL),('39f2ba02-3da2-4599-8a04-02b33f0a9d7e','CORE','org.qifu.support.CleanTempUploadForContextInitAndDestroy','INITIALIZE','Clear temp upload data.','admin','2017-05-22 19:35:28',NULL,NULL),('76a17028-8006-4de9-aea1-2e31a97c8a84','CORE','org.qifu.support.CleanTempUploadForContextInitAndDestroy','DESTROY','Clear temp upload data.','admin','2017-05-22 19:35:42',NULL,NULL),('dcf46122-4ac3-4bc7-a5c9-1003db83a0f2','CORE','org.qifu.support.DeployJreportForContextInitialized','INITIALIZE','Deploy jasperreport source file.','admin','2017-05-22 19:36:39',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ctx_bean` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -692,4 +693,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-22 19:25:55
+-- Dump completed on 2017-05-22 19:39:05
