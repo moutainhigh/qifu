@@ -654,6 +654,72 @@ LOCK TABLES `tb_sys_usess` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_ws_config`
+--
+
+DROP TABLE IF EXISTS `tb_sys_ws_config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_ws_config` (
+  `OID` char(36) NOT NULL,
+  `WS_ID` varchar(10) NOT NULL,
+  `SYSTEM` varchar(10) NOT NULL,
+  `TYPE` varchar(4) NOT NULL,
+  `BEAN_ID` varchar(255) NOT NULL,
+  `PUBLISH_ADDRESS` varchar(255) NOT NULL,
+  `DESCRIPTION` varchar(500) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`WS_ID`),
+  KEY `IDX_1` (`SYSTEM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_ws_config`
+--
+
+LOCK TABLES `tb_sys_ws_config` WRITE;
+/*!40000 ALTER TABLE `tb_sys_ws_config` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_ws_config` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_ws_service`
+--
+
+DROP TABLE IF EXISTS `tb_sys_ws_service`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_ws_service` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(10) NOT NULL,
+  `SYSTEM` varchar(10) NOT NULL,
+  `BEAN_ID` varchar(255) NOT NULL,
+  `WSDL_ADDRESS` varchar(255) DEFAULT NULL,
+  `DESCRIPTION` varchar(500) DEFAULT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`ID`,`SYSTEM`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_ws_service`
+--
+
+LOCK TABLES `tb_sys_ws_service` WRITE;
+/*!40000 ALTER TABLE `tb_sys_ws_service` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_ws_service` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_user_role`
 --
 
@@ -693,4 +759,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-22 19:39:05
+-- Dump completed on 2017-05-22 20:56:03
