@@ -1037,6 +1037,678 @@ LOCK TABLES `act_ru_variable` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `comm_qrtz_blob_triggers`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_blob_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_blob_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `BLOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `comm_qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_blob_triggers`
+--
+
+LOCK TABLES `comm_qrtz_blob_triggers` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_blob_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_blob_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_calendars`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_calendars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_calendars` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `CALENDAR_NAME` varchar(200) NOT NULL,
+  `CALENDAR` blob NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_calendars`
+--
+
+LOCK TABLES `comm_qrtz_calendars` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_calendars` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_calendars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_cron_triggers`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_cron_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_cron_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `CRON_EXPRESSION` varchar(120) NOT NULL,
+  `TIME_ZONE_ID` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `comm_qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_cron_triggers`
+--
+
+LOCK TABLES `comm_qrtz_cron_triggers` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_cron_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_cron_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_fired_triggers`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_fired_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_fired_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `ENTRY_ID` varchar(95) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `FIRED_TIME` bigint(13) NOT NULL,
+  `SCHED_TIME` bigint(13) NOT NULL,
+  `PRIORITY` int(11) NOT NULL,
+  `STATE` varchar(16) NOT NULL,
+  `JOB_NAME` varchar(200) DEFAULT NULL,
+  `JOB_GROUP` varchar(200) DEFAULT NULL,
+  `IS_NONCONCURRENT` varchar(1) DEFAULT NULL,
+  `REQUESTS_RECOVERY` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`),
+  KEY `IDX_COMM_QRTZ_FT_TRIG_INST_NAME` (`SCHED_NAME`,`INSTANCE_NAME`),
+  KEY `IDX_COMM_QRTZ_FT_INST_JOB_REQ_RCVRY` (`SCHED_NAME`,`INSTANCE_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_COMM_QRTZ_FT_J_G` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_COMM_QRTZ_FT_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_COMM_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_COMM_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_fired_triggers`
+--
+
+LOCK TABLES `comm_qrtz_fired_triggers` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_fired_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_fired_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_job_details`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_job_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_job_details` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `JOB_CLASS_NAME` varchar(250) NOT NULL,
+  `IS_DURABLE` varchar(1) NOT NULL,
+  `IS_NONCONCURRENT` varchar(1) NOT NULL,
+  `IS_UPDATE_DATA` varchar(1) NOT NULL,
+  `REQUESTS_RECOVERY` varchar(1) NOT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_COMM_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_COMM_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_job_details`
+--
+
+LOCK TABLES `comm_qrtz_job_details` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_job_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_job_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_locks`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_locks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_locks` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `LOCK_NAME` varchar(40) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_locks`
+--
+
+LOCK TABLES `comm_qrtz_locks` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_locks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_locks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_paused_trigger_grps`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_paused_trigger_grps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_paused_trigger_grps` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_paused_trigger_grps`
+--
+
+LOCK TABLES `comm_qrtz_paused_trigger_grps` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_paused_trigger_grps` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_paused_trigger_grps` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_scheduler_state`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_scheduler_state`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_scheduler_state` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
+  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_scheduler_state`
+--
+
+LOCK TABLES `comm_qrtz_scheduler_state` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_scheduler_state` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_scheduler_state` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_simple_triggers`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_simple_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_simple_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `REPEAT_COUNT` bigint(7) NOT NULL,
+  `REPEAT_INTERVAL` bigint(12) NOT NULL,
+  `TIMES_TRIGGERED` bigint(10) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `comm_qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_simple_triggers`
+--
+
+LOCK TABLES `comm_qrtz_simple_triggers` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_simple_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_simple_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_simprop_triggers`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_simprop_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_simprop_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `STR_PROP_1` varchar(512) DEFAULT NULL,
+  `STR_PROP_2` varchar(512) DEFAULT NULL,
+  `STR_PROP_3` varchar(512) DEFAULT NULL,
+  `INT_PROP_1` int(11) DEFAULT NULL,
+  `INT_PROP_2` int(11) DEFAULT NULL,
+  `LONG_PROP_1` bigint(20) DEFAULT NULL,
+  `LONG_PROP_2` bigint(20) DEFAULT NULL,
+  `DEC_PROP_1` decimal(13,4) DEFAULT NULL,
+  `DEC_PROP_2` decimal(13,4) DEFAULT NULL,
+  `BOOL_PROP_1` varchar(1) DEFAULT NULL,
+  `BOOL_PROP_2` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `comm_qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `comm_qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_simprop_triggers`
+--
+
+LOCK TABLES `comm_qrtz_simprop_triggers` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_simprop_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_simprop_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comm_qrtz_triggers`
+--
+
+DROP TABLE IF EXISTS `comm_qrtz_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comm_qrtz_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `NEXT_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PREV_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PRIORITY` int(11) DEFAULT NULL,
+  `TRIGGER_STATE` varchar(16) NOT NULL,
+  `TRIGGER_TYPE` varchar(8) NOT NULL,
+  `START_TIME` bigint(13) NOT NULL,
+  `END_TIME` bigint(13) DEFAULT NULL,
+  `CALENDAR_NAME` varchar(200) DEFAULT NULL,
+  `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_COMM_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_COMM_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_COMM_QRTZ_T_C` (`SCHED_NAME`,`CALENDAR_NAME`),
+  KEY `IDX_COMM_QRTZ_T_G` (`SCHED_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_COMM_QRTZ_T_STATE` (`SCHED_NAME`,`TRIGGER_STATE`),
+  KEY `IDX_COMM_QRTZ_T_N_STATE` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_COMM_QRTZ_T_N_G_STATE` (`SCHED_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_COMM_QRTZ_T_NEXT_FIRE_TIME` (`SCHED_NAME`,`NEXT_FIRE_TIME`),
+  KEY `IDX_COMM_QRTZ_T_NFT_ST` (`SCHED_NAME`,`TRIGGER_STATE`,`NEXT_FIRE_TIME`),
+  KEY `IDX_COMM_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`),
+  KEY `IDX_COMM_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`),
+  KEY `IDX_COMM_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  CONSTRAINT `comm_qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `comm_qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comm_qrtz_triggers`
+--
+
+LOCK TABLES `comm_qrtz_triggers` WRITE;
+/*!40000 ALTER TABLE `comm_qrtz_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comm_qrtz_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_blob_triggers`
+--
+
+DROP TABLE IF EXISTS `qrtz_blob_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_blob_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `BLOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `SCHED_NAME` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_blob_triggers`
+--
+
+LOCK TABLES `qrtz_blob_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_blob_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_blob_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_calendars`
+--
+
+DROP TABLE IF EXISTS `qrtz_calendars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_calendars` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `CALENDAR_NAME` varchar(200) NOT NULL,
+  `CALENDAR` blob NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`CALENDAR_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_calendars`
+--
+
+LOCK TABLES `qrtz_calendars` WRITE;
+/*!40000 ALTER TABLE `qrtz_calendars` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_calendars` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_cron_triggers`
+--
+
+DROP TABLE IF EXISTS `qrtz_cron_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_cron_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `CRON_EXPRESSION` varchar(120) NOT NULL,
+  `TIME_ZONE_ID` varchar(80) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_cron_triggers`
+--
+
+LOCK TABLES `qrtz_cron_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_cron_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_cron_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_fired_triggers`
+--
+
+DROP TABLE IF EXISTS `qrtz_fired_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_fired_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `ENTRY_ID` varchar(95) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `FIRED_TIME` bigint(13) NOT NULL,
+  `SCHED_TIME` bigint(13) NOT NULL,
+  `PRIORITY` int(11) NOT NULL,
+  `STATE` varchar(16) NOT NULL,
+  `JOB_NAME` varchar(200) DEFAULT NULL,
+  `JOB_GROUP` varchar(200) DEFAULT NULL,
+  `IS_NONCONCURRENT` varchar(1) DEFAULT NULL,
+  `REQUESTS_RECOVERY` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`ENTRY_ID`),
+  KEY `IDX_QRTZ_FT_TRIG_INST_NAME` (`SCHED_NAME`,`INSTANCE_NAME`),
+  KEY `IDX_QRTZ_FT_INST_JOB_REQ_RCVRY` (`SCHED_NAME`,`INSTANCE_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_QRTZ_FT_J_G` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_FT_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_FT_T_G` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_FT_TG` (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_fired_triggers`
+--
+
+LOCK TABLES `qrtz_fired_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_fired_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_fired_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_job_details`
+--
+
+DROP TABLE IF EXISTS `qrtz_job_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_job_details` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `JOB_CLASS_NAME` varchar(250) NOT NULL,
+  `IS_DURABLE` varchar(1) NOT NULL,
+  `IS_NONCONCURRENT` varchar(1) NOT NULL,
+  `IS_UPDATE_DATA` varchar(1) NOT NULL,
+  `REQUESTS_RECOVERY` varchar(1) NOT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_J_REQ_RECOVERY` (`SCHED_NAME`,`REQUESTS_RECOVERY`),
+  KEY `IDX_QRTZ_J_GRP` (`SCHED_NAME`,`JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_job_details`
+--
+
+LOCK TABLES `qrtz_job_details` WRITE;
+/*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_locks`
+--
+
+DROP TABLE IF EXISTS `qrtz_locks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_locks` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `LOCK_NAME` varchar(40) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`LOCK_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_locks`
+--
+
+LOCK TABLES `qrtz_locks` WRITE;
+/*!40000 ALTER TABLE `qrtz_locks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_locks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_paused_trigger_grps`
+--
+
+DROP TABLE IF EXISTS `qrtz_paused_trigger_grps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_paused_trigger_grps` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_paused_trigger_grps`
+--
+
+LOCK TABLES `qrtz_paused_trigger_grps` WRITE;
+/*!40000 ALTER TABLE `qrtz_paused_trigger_grps` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_paused_trigger_grps` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_scheduler_state`
+--
+
+DROP TABLE IF EXISTS `qrtz_scheduler_state`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_scheduler_state` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `INSTANCE_NAME` varchar(200) NOT NULL,
+  `LAST_CHECKIN_TIME` bigint(13) NOT NULL,
+  `CHECKIN_INTERVAL` bigint(13) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`INSTANCE_NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_scheduler_state`
+--
+
+LOCK TABLES `qrtz_scheduler_state` WRITE;
+/*!40000 ALTER TABLE `qrtz_scheduler_state` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_scheduler_state` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_simple_triggers`
+--
+
+DROP TABLE IF EXISTS `qrtz_simple_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_simple_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `REPEAT_COUNT` bigint(7) NOT NULL,
+  `REPEAT_INTERVAL` bigint(12) NOT NULL,
+  `TIMES_TRIGGERED` bigint(10) NOT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_simple_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_simple_triggers`
+--
+
+LOCK TABLES `qrtz_simple_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_simple_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_simple_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_simprop_triggers`
+--
+
+DROP TABLE IF EXISTS `qrtz_simprop_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_simprop_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `STR_PROP_1` varchar(512) DEFAULT NULL,
+  `STR_PROP_2` varchar(512) DEFAULT NULL,
+  `STR_PROP_3` varchar(512) DEFAULT NULL,
+  `INT_PROP_1` int(11) DEFAULT NULL,
+  `INT_PROP_2` int(11) DEFAULT NULL,
+  `LONG_PROP_1` bigint(20) DEFAULT NULL,
+  `LONG_PROP_2` bigint(20) DEFAULT NULL,
+  `DEC_PROP_1` decimal(13,4) DEFAULT NULL,
+  `DEC_PROP_2` decimal(13,4) DEFAULT NULL,
+  `BOOL_PROP_1` varchar(1) DEFAULT NULL,
+  `BOOL_PROP_2` varchar(1) DEFAULT NULL,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  CONSTRAINT `qrtz_simprop_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`) REFERENCES `qrtz_triggers` (`SCHED_NAME`, `TRIGGER_NAME`, `TRIGGER_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_simprop_triggers`
+--
+
+LOCK TABLES `qrtz_simprop_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_simprop_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_simprop_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `qrtz_triggers`
+--
+
+DROP TABLE IF EXISTS `qrtz_triggers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `qrtz_triggers` (
+  `SCHED_NAME` varchar(120) NOT NULL,
+  `TRIGGER_NAME` varchar(200) NOT NULL,
+  `TRIGGER_GROUP` varchar(200) NOT NULL,
+  `JOB_NAME` varchar(200) NOT NULL,
+  `JOB_GROUP` varchar(200) NOT NULL,
+  `DESCRIPTION` varchar(250) DEFAULT NULL,
+  `NEXT_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PREV_FIRE_TIME` bigint(13) DEFAULT NULL,
+  `PRIORITY` int(11) DEFAULT NULL,
+  `TRIGGER_STATE` varchar(16) NOT NULL,
+  `TRIGGER_TYPE` varchar(8) NOT NULL,
+  `START_TIME` bigint(13) NOT NULL,
+  `END_TIME` bigint(13) DEFAULT NULL,
+  `CALENDAR_NAME` varchar(200) DEFAULT NULL,
+  `MISFIRE_INSTR` smallint(2) DEFAULT NULL,
+  `JOB_DATA` blob,
+  PRIMARY KEY (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_T_J` (`SCHED_NAME`,`JOB_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_T_JG` (`SCHED_NAME`,`JOB_GROUP`),
+  KEY `IDX_QRTZ_T_C` (`SCHED_NAME`,`CALENDAR_NAME`),
+  KEY `IDX_QRTZ_T_G` (`SCHED_NAME`,`TRIGGER_GROUP`),
+  KEY `IDX_QRTZ_T_STATE` (`SCHED_NAME`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_N_STATE` (`SCHED_NAME`,`TRIGGER_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_N_G_STATE` (`SCHED_NAME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_NEXT_FIRE_TIME` (`SCHED_NAME`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_ST` (`SCHED_NAME`,`TRIGGER_STATE`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`),
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_STATE`),
+  KEY `IDX_QRTZ_T_NFT_ST_MISFIRE_GRP` (`SCHED_NAME`,`MISFIRE_INSTR`,`NEXT_FIRE_TIME`,`TRIGGER_GROUP`,`TRIGGER_STATE`),
+  CONSTRAINT `qrtz_triggers_ibfk_1` FOREIGN KEY (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`) REFERENCES `qrtz_job_details` (`SCHED_NAME`, `JOB_NAME`, `JOB_GROUP`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `qrtz_triggers`
+--
+
+LOCK TABLES `qrtz_triggers` WRITE;
+/*!40000 ALTER TABLE `qrtz_triggers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qrtz_triggers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_account`
 --
 
@@ -1423,6 +2095,79 @@ LOCK TABLES `tb_sys_event_log` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_expr_job`
+--
+
+DROP TABLE IF EXISTS `tb_sys_expr_job`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_expr_job` (
+  `OID` char(36) NOT NULL,
+  `SYSTEM` varchar(10) NOT NULL,
+  `ID` varchar(20) NOT NULL,
+  `NAME` varchar(100) NOT NULL,
+  `ACTIVE` varchar(1) NOT NULL DEFAULT 'Y',
+  `DESCRIPTION` varchar(500) DEFAULT NULL,
+  `RUN_STATUS` varchar(1) NOT NULL DEFAULT 'Y',
+  `CHECK_FAULT` varchar(1) NOT NULL DEFAULT 'N',
+  `EXPR_ID` varchar(20) NOT NULL,
+  `RUN_DAY_OF_WEEK` varchar(1) NOT NULL,
+  `RUN_HOUR` varchar(2) NOT NULL,
+  `RUN_MINUTE` varchar(2) NOT NULL,
+  `CONTACT_MODE` varchar(1) NOT NULL DEFAULT '0',
+  `CONTACT` varchar(500) DEFAULT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`ID`),
+  KEY `IDX_1` (`SYSTEM`,`ACTIVE`,`EXPR_ID`,`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_expr_job`
+--
+
+LOCK TABLES `tb_sys_expr_job` WRITE;
+/*!40000 ALTER TABLE `tb_sys_expr_job` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_expr_job` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_expr_job_log`
+--
+
+DROP TABLE IF EXISTS `tb_sys_expr_job_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_expr_job_log` (
+  `OID` char(36) NOT NULL,
+  `ID` varchar(20) NOT NULL,
+  `LOG_STATUS` varchar(1) NOT NULL DEFAULT 'N',
+  `BEGIN_DATETIME` datetime NOT NULL,
+  `END_DATETIME` datetime NOT NULL,
+  `FAULT_MSG` varchar(2000) DEFAULT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  KEY `IDX_1` (`ID`,`LOG_STATUS`,`BEGIN_DATETIME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_expr_job_log`
+--
+
+LOCK TABLES `tb_sys_expr_job_log` WRITE;
+/*!40000 ALTER TABLE `tb_sys_expr_job_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_expr_job_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_sys_expression`
 --
 
@@ -1575,6 +2320,45 @@ LOCK TABLES `tb_sys_login_log` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tb_sys_mail_helper`
+--
+
+DROP TABLE IF EXISTS `tb_sys_mail_helper`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_mail_helper` (
+  `OID` char(36) NOT NULL,
+  `MAIL_ID` varchar(17) NOT NULL,
+  `SUBJECT` varchar(200) NOT NULL,
+  `TEXT` blob,
+  `MAIL_FROM` varchar(100) NOT NULL,
+  `MAIL_TO` varchar(100) NOT NULL,
+  `MAIL_CC` varchar(1000) DEFAULT NULL,
+  `MAIL_BCC` varchar(1000) DEFAULT NULL,
+  `SUCCESS_FLAG` varchar(1) NOT NULL DEFAULT 'N',
+  `SUCCESS_TIME` datetime DEFAULT NULL,
+  `RETAIN_FLAG` varchar(1) NOT NULL DEFAULT 'N',
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  UNIQUE KEY `UK_1` (`MAIL_ID`),
+  KEY `IDX_1` (`MAIL_ID`),
+  KEY `IDX_2` (`SUCCESS_FLAG`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_mail_helper`
+--
+
+LOCK TABLES `tb_sys_mail_helper` WRITE;
+/*!40000 ALTER TABLE `tb_sys_mail_helper` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_mail_helper` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tb_sys_menu`
 --
 
@@ -1671,6 +2455,40 @@ LOCK TABLES `tb_sys_prog` WRITE;
 /*!40000 ALTER TABLE `tb_sys_prog` DISABLE KEYS */;
 INSERT INTO `tb_sys_prog` VALUES ('005463fd-a1f4-4e9f-89a7-bd86aedfcbdf','CORE_PROG003D0002E','02 - Expression (Edit)','core.sysExpressionEdit.do','Y','N',0,0,'CORE','ITEM','TEXT_SOURCE','admin','2017-05-24 11:38:45',NULL,NULL),('186b1fb1-749f-4b6f-97d1-6b7fb8115345','CORE_PROG001D0004E','04 - Template (Edit)','core.templateEdit.do','Y','N',0,0,'CORE','ITEM','TEMPLATE','admin','2017-05-12 10:40:10',NULL,NULL),('1902b119-1719-40c9-899b-14d07a8035d7','CORE_PROG003D0004Q','04 - BPM Resource','core.sysBpmResourceManagement.do','N','N',0,0,'CORE','ITEM','DIAGRAM','admin','2017-06-01 10:45:05','admin','2017-06-01 10:51:09'),('1b11c7eb-6133-48fb-87f0-dfbd098ce914','CORE_PROG001D0001E','01 - System site (Edit)','core.sysSiteEdit.do','Y','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('1e393fe3-8bbc-482c-aa23-bbb22a1dbafb','CORE_PROG001D0005A','05 - Report (Create)','core.sysReportCreate.do','N','N',0,0,'CORE','ITEM','APPLICATION_PDF','admin','2017-05-18 09:55:46',NULL,NULL),('22560527-90fb-4e5a-a89b-353d2aa1d433','CORE_PROG001D0005E','05 - Report (Edit)','core.sysReportEdit.do','Y','N',0,0,'CORE','ITEM','APPLICATION_PDF','admin','2017-05-18 09:56:27',NULL,NULL),('28a0b08c-d7df-45ce-90ee-202013895953','CORE_PROG003D0004E','04 - BPM Resource (Edit)','core.sysBpmResourceEdit.do','Y','N',0,0,'CORE','ITEM','DIAGRAM','admin','2017-06-01 10:46:37','admin','2017-06-01 10:51:03'),('317d545c-8024-4de6-9bf9-4d9a2fcd0d0d','CORE_PROG003D0004S01Q','04 - BPM Resource (Process)','core.sysBpmResourceProcessObjectList.do','Y','N',0,0,'CORE','ITEM','DIAGRAM','admin','2017-06-01 10:47:12','admin','2017-06-01 10:51:35'),('329bd834-3e71-47fe-b96f-dead8e2738bd','CORE_PROG003D0001A','01. WebService (Create)','core.sysWebServiceCreate.do','N','N',0,0,'CORE','ITEM','WWW','admin','2017-05-23 08:56:55',NULL,NULL),('3630ee1b-6169-452f-821f-5c015dfb84d5','CORE_PROG001D','Z01. Config','','N','N',0,0,'CORE','FOLDER','PROPERTIES','admin','2014-10-02 00:00:00','admin','2017-05-08 21:39:06'),('36e73d8d-bb6b-485f-90e3-e46ac9a10ad6','CORE_PROG003D0005A','05 - BPM Resource role (Create)','core.sysBpmResourceRoleCreate.do','N','N',0,0,'CORE','ITEM','PEOPLE','admin','2017-06-01 10:49:09','admin','2017-06-01 10:51:52'),('41fa29d8-3a53-4fbd-b2b1-cdbfd0729767','CORE_PROG001D0004Q','04 - Template','core.templateManagement.do','N','N',0,0,'CORE','ITEM','TEMPLATE','admin','2017-05-12 10:36:41',NULL,NULL),('44d0e6fc-51df-4dd2-b05a-17886b180c35','CORE_PROG003D0005Q','05 - BPM Resource role','core.sysBpmResourceRoleManagement.do','N','N',0,0,'CORE','ITEM','PEOPLE','admin','2017-06-01 10:48:14','admin','2017-06-01 10:52:04'),('5599c3a9-f971-432a-a8e7-807d960ef196','CORE_PROG003D0003E','03 - Bean support (Edit)','core.sysBeanSupportEdit.do','Y','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-25 10:39:32',NULL,NULL),('5e082c7c-1730-4176-89c6-93e235707deb','CORE_PROG002D0001A','01 - Role (Create)','core.roleCreate.do','N','N',0,0,'CORE','ITEM','PEOPLE','admin','2017-05-09 11:15:50',NULL,NULL),('62780575-75e4-4a19-8b3a-849f9aafbc0e','CORE_PROG001D0006E','06 - Web context bean (Edit)','core.sysCtxbeanEdit.do','Y','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-22 14:30:59',NULL,NULL),('6a442973-0e0c-4a7a-d546-464f4ff5f7a9','CORE_PROG001D0003Q','03 - Menu settings','core.menuSettingsManagement.do','N','N',0,0,'CORE','ITEM','FOLDER','admin','2014-10-02 00:00:00',NULL,NULL),('6b210525-8975-4fb5-954c-fe349f66d3fe','CORE_PROG002D0001S01Q','01 - Role (permission)','core.rolePermissionManagement.do','Y','N',0,0,'CORE','ITEM','IMPORTANT','admin','2017-05-09 14:32:47',NULL,NULL),('72e6e0d1-1818-47d3-99f9-5134fb211b79','CORE_PROG002D','Z02. Role authority','','N','N',0,0,'CORE','FOLDER','SHARED','admin','2017-05-08 21:27:52','admin','2017-05-08 21:39:30'),('754325fb-be1a-4474-acbd-e06b8c0ef2a0','CORE_PROG001D0006A','06 - Web context bean (Create)','core.sysCtxbeanCreate.do','N','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-22 14:30:36',NULL,NULL),('7746f746-961f-44c2-9b66-fa43c0f49838','CORE_PROG001D0004S01Q','04 - Template (Parameter)','core.templateParam.do','Y','N',0,0,'CORE','ITEM','TEMPLATE','admin','2017-05-12 10:42:04',NULL,NULL),('7984332c-7963-4a02-9888-75a55b5af9f9','CORE_PROG003D0003S02Q','03 - Bean support (Parameter)','core.sysBeanSupportExpressionParam.do','Y','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-25 10:42:08','admin','2017-05-25 10:42:28'),('7d9ddc45-3eab-4f61-8c0a-d5505c0cc748','CORE_PROG001D0004A','04 - Template (Create)','core.templateCreate.do','N','N',0,0,'CORE','ITEM','TEMPLATE','admin','2017-05-12 10:39:20',NULL,NULL),('7e6dcf7e-959a-43cb-a267-2d0e3629c4df','CORE_PROG001D0006Q','06 - Web context bean','core.sysCtxbeanManagement.do','N','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-22 14:29:11',NULL,NULL),('8499957e-6da9-4160-c2ec-dfb7dbc202fe','CORE_PROG001D0002E','02 - Program (Edit)','core.sysProgramEdit.do','Y','N',0,0,'CORE','ITEM','G_APP_INSTALL','admin','2014-10-02 00:00:00',NULL,NULL),('87ae5519-cab2-49d4-a3a4-eca6a219e2d8','CORE_PROG003D0001Q','01. WebService','core.sysWebServiceManagement.do','N','N',0,0,'CORE','ITEM','WWW','admin','2017-05-23 08:56:13',NULL,NULL),('9050b7ba-c3ff-4483-a887-4979f969f6c8','CORE_PROG003D0004A','04 - BPM Resource (Create)','core.sysBpmResourceCreate.do','N','N',0,0,'CORE','ITEM','DIAGRAM','admin','2017-06-01 10:45:55','admin','2017-06-01 10:50:55'),('ac5bcfd0-4abd-11e4-916c-0800200c9a66','CORE_PROG001D0001A','01 - System site (Create)','core.sysSiteCreate.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('b39159ad-0707-4515-b78d-e3fc72c53974','CORE_PROG002D0001E','01 - Role (Edit)','core.roleEdit.do','Y','N',0,0,'CORE','ITEM','PEOPLE','admin','2017-05-09 12:11:53',NULL,NULL),('b419219f-3014-4589-b93d-46cf00c10c4b','CORE_PROG003D0005E','05 - BPM Resource role (Edit)','core.sysBpmResourceRoleEdit.do','Y','N',0,0,'CORE','ITEM','PEOPLE','admin','2017-06-01 10:49:32','admin','2017-06-01 10:51:58'),('b6b89559-6864-46ab-9ca9-0992dcf238f1','CORE_PROG001D0001Q','01 - System site','core.sysSiteManagement.do','N','N',0,0,'CORE','ITEM','COMPUTER','admin','2014-10-02 00:00:00',NULL,NULL),('b978f706-4c5f-40f8-83b1-395492f141d4','CORE_PROG002D0001Q','01 - Role','core.roleManagement.do','N','N',0,0,'CORE','ITEM','PEOPLE','admin','2017-05-08 21:32:50',NULL,NULL),('bc97b0d4-516a-4f26-a79a-88ecc65bfe50','CORE_PROG003D0003Q','03 - Bean support','core.sysBeanSupportManagement.do','N','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-25 10:38:42',NULL,NULL),('bffce168-6b55-47ed-9fa3-d37666a1e9c7','CORE_PROG003D0003A','03 - Bean support (Create)','core.sysBeanSupportCreate.do','N','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-25 10:39:07',NULL,NULL),('c96ebde8-7044-4b05-a155-68a0c2605619','CORE_PROG002D0003Q','03 - Role for menu','core.menuRoleManagement.do','N','N',0,0,'CORE','ITEM','FOLDER','admin','2017-05-08 21:37:01',NULL,NULL),('d1254ea1-0f2d-4c49-9e64-d24a8e76d6de','CORE_PROG003D0001E','01. WebService (Edit)','core.sysWebServiceEdit.do','Y','N',0,0,'CORE','ITEM','WWW','admin','2017-05-23 08:57:23',NULL,NULL),('da0e70df-29b1-4a2e-890c-eab723c86ed6','CORE_PROG002D0001S02Q','01 - Role (copy)','core.roleCopyManagement.do','Y','Y',650,600,'CORE','ITEM','PEOPLE','admin','2017-05-09 20:56:50','admin','2017-05-10 09:54:35'),('da7d969a-5efb-4e84-9eab-4fdae236f28c','CORE_PROG002D0002Q','02 - User role','core.userRoleManagement.do','N','N',0,0,'CORE','ITEM','PERSON','admin','2017-05-08 21:34:39',NULL,NULL),('dda67b1d-e3a2-4534-835a-c62d9e8421f3','CORE_PROG001D0005S01Q','05 - Report (Parameter)','core.sysReportParam.do','Y','N',0,0,'CORE','ITEM','APPLICATION_PDF','admin','2017-05-18 09:57:26',NULL,NULL),('e32b9329-bb38-46d7-8552-2307bac77724','CORE_PROG001D0002A','02 - Program (Create)','core.sysProgramCreate.do','N','N',0,0,'CORE','ITEM','G_APP_INSTALL','admin','2014-10-02 00:00:00',NULL,NULL),('e42f4e11-ddf2-49f5-9267-7cfed6ab1d02','CORE_PROG001D0005S02Q','05 - Report (Preview)','core.sysReportPreview.do','Y','Y',600,600,'CORE','ITEM','APPLICATION_PDF','admin','2017-05-18 10:00:04',NULL,NULL),('e4e691f8-2cd8-444d-b412-ccdbbec029a1','CORE_PROG003D','Z03. Service','','N','N',0,0,'CORE','FOLDER','DIAGRAM','admin','2017-05-23 08:53:46',NULL,NULL),('eb6e199f-c853-4fbf-acf3-0c9c77ba9953','CORE_PROG001D0002Q','02 - Program','core.sysProgramManagement.do','N','N',0,0,'CORE','ITEM','G_APP_INSTALL','admin','2014-10-02 00:00:00',NULL,NULL),('eb786ffd-c7d1-4631-aed2-4d9d7368eb13','CORE_PROG001D0005Q','05 - Report','core.sysReportManagement.do','N','N',0,0,'CORE','ITEM','APPLICATION_PDF','admin','2017-05-18 09:54:35',NULL,NULL),('edf4ab8c-df86-4ef0-91f6-c2ddcc6e8f7d','CORE_PROG003D0002A','02 - Expression (Create)','core.sysExpressionCreate.do','N','N',0,0,'CORE','ITEM','TEXT_SOURCE','admin','2017-05-24 11:38:27',NULL,NULL),('fa1e4078-638f-41e6-82d4-77ef92e76374','CORE_PROG003D0002Q','02 - Expression','core.sysExpressionManagement.do','N','N',0,0,'CORE','ITEM','TEXT_SOURCE','admin','2017-05-24 11:38:04',NULL,NULL),('fee6533d-da1c-444b-aec9-6d4f81fa051d','CORE_PROG003D0003S01Q','03 - Bean support (Expression)','core.sysBeanSupportExpression.do','Y','N',0,0,'CORE','ITEM','SYSTEM','admin','2017-05-25 10:41:46',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_prog` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_sys_qfield_log`
+--
+
+DROP TABLE IF EXISTS `tb_sys_qfield_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_sys_qfield_log` (
+  `OID` char(36) NOT NULL,
+  `SYSTEM` varchar(10) NOT NULL,
+  `PROG_ID` varchar(50) NOT NULL,
+  `METHOD_NAME` varchar(255) NOT NULL,
+  `FIELD_NAME` varchar(255) NOT NULL,
+  `FIELD_VALUE` varchar(500) DEFAULT NULL,
+  `QUERY_USER_ID` varchar(24) NOT NULL,
+  `CUSERID` varchar(24) NOT NULL,
+  `CDATE` datetime NOT NULL,
+  `UUSERID` varchar(24) DEFAULT NULL,
+  `UDATE` datetime DEFAULT NULL,
+  PRIMARY KEY (`OID`),
+  KEY `IDX_1` (`SYSTEM`,`PROG_ID`),
+  KEY `IDX_2` (`QUERY_USER_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_sys_qfield_log`
+--
+
+LOCK TABLES `tb_sys_qfield_log` WRITE;
+/*!40000 ALTER TABLE `tb_sys_qfield_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tb_sys_qfield_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1898,7 +2716,7 @@ CREATE TABLE `tb_sys_ws_config` (
 
 LOCK TABLES `tb_sys_ws_config` WRITE;
 /*!40000 ALTER TABLE `tb_sys_ws_config` DISABLE KEYS */;
-INSERT INTO `tb_sys_ws_config` VALUES ('3b01608b-6c8d-4a11-a548-324fb923077e','CORE-WS002','CORE','REST','core.webservice.HelloService','','for TEST hello REST!','admin','2017-05-23 13:51:41',NULL,NULL),('674ba477-4c70-4a3a-86b6-0ba08c608c58','CORE-WS001','CORE','SOAP','core.webservice.HelloService','/hello','for TEST hello SOAP!','admin','2017-05-23 13:51:09',NULL,NULL),('e219c990-223f-43e1-9a56-35b3f4625fc2','CORE-WS003','CORE','SOAP','core.webservice.SendMailService','/mail','for TEST mail SOAP!','admin','2017-05-23 13:52:59',NULL,NULL);
+INSERT INTO `tb_sys_ws_config` VALUES ('30a1371a-123f-465d-95df-8c295205a35d','CORE-WS004','CORE','REST','core.webservice.ManualJobService','','Expression Job manual service!','admin','2017-06-02 12:26:20',NULL,NULL),('3b01608b-6c8d-4a11-a548-324fb923077e','CORE-WS002','CORE','REST','core.webservice.HelloService','','for TEST hello REST!','admin','2017-05-23 13:51:41',NULL,NULL),('674ba477-4c70-4a3a-86b6-0ba08c608c58','CORE-WS001','CORE','SOAP','core.webservice.HelloService','/hello','for TEST hello SOAP!','admin','2017-05-23 13:51:09',NULL,NULL),('e219c990-223f-43e1-9a56-35b3f4625fc2','CORE-WS003','CORE','SOAP','core.webservice.SendMailService','/mail','for TEST mail SOAP!','admin','2017-05-23 13:52:59',NULL,NULL);
 /*!40000 ALTER TABLE `tb_sys_ws_config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1974,4 +2792,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-01 19:23:06
+-- Dump completed on 2017-06-02 19:07:11
